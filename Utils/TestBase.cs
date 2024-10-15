@@ -20,5 +20,6 @@ public class TestBase
     public void After()
     {
         driver.Quit();
+        driver.Dispose();
     }
 }
