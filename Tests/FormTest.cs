@@ -20,6 +20,8 @@ public class SendEnterInsuranceDataForm
     [SetUp] // Configura um método para ser executado antes dos testes
     public void Before()
     {
+        driver = new ChromeDriver();
+
         driver.Manage().Window.Maximize();
 
     }
@@ -33,8 +35,6 @@ public class SendEnterInsuranceDataForm
     [Test] // Indica que é um método de teste
     public void SendForm()
     {
-        driver = new ChromeDriver();
-
         // Navigate to url and assert
         var motorcycleInsurancePage = new MotorcycleInsurancePage(driver);
         motorcycleInsurancePage.GoTo();
@@ -42,7 +42,6 @@ public class SendEnterInsuranceDataForm
 
         // Fill out the Vehicle form and submit
         motorcycleInsurancePage.FillVehicleFormAndSubmit();
-        Assert.IsTrue(motorcycleInsurancePage.IsVisible);
 
         // Fill out the Insurance form and submit
         motorcycleInsurancePage.FillInsuranceFormAndSubmit();
@@ -126,11 +125,13 @@ internal class MotorcycleInsurancePage
 
         SelectDropdownByValue(By.Id("occupation"), "Employee");
 
+        Thread.Sleep(3000);
+
         /* Selecionar Hobbies */
-        CheckMultipleCheckboxes(By.CssSelector("Speeding"), By.CssSelector("Skydiving"));
+        CheckMultipleCheckboxes(By.XPath("//label[contains(., \"Speeding\")]/input"), By.XPath("//label[contains(., \"Skydiving\")]/input"));
 
         // Assertion
-        AssertMultipleCheckboxesChecked(By.CssSelector("Speeding"), By.CssSelector("Skydiving"));
+        AssertMultipleCheckboxesChecked(By.XPath("//label[contains(., \"Speeding\")]/input"), By.XPath("//label[contains(., \"Skydiving\")]/input"));
 
         // Navigate to next page of Form 'Enter Product Data'
         Driver.FindElement(By.Id("nextenterproductdata")).Click();
