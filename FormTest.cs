@@ -24,22 +24,18 @@ public class SendEnterInsuranceDataForm
 
     [TearDown] // Configura um método para ser usado depois dos testes
     public void After()
-    { 
+    {
 
     }
 
     [Test] // Indica que é um método de teste
     public void SendForm()
     {
-        // driver.Navigate().GoToUrl("http://sampleapp.tricentis.com/101/app.php");
-
-        // Assert.That(bool.Parse(driver.Title), "Enter Vehicle Data");
-
         driver = new ChromeDriver();
 
         // Navigate to url and assert
         var motorcycleInsurancePage = new MotorcycleInsurancePage(driver);
-        motorcycleInsurancePage.GoToUrl();
+        motorcycleInsurancePage.GoTo();
         Assert.IsTrue(motorcycleInsurancePage.IsVisible);
 
         // Fill out the form and submit
@@ -71,9 +67,10 @@ internal class MotorcycleInsurancePage
         throw new NotImplementedException();
     }
 
-    internal void GoToUrl()
+    internal void GoTo()
     {
-        throw new NotImplementedException();
+        driver.Navigate().GoToUrl("http://sampleapp.tricentis.com/101/app.php");
+        // Assert.That(bool.Parse(driver.Title), "Enter Vehicle Data");
     }
-    
+
 }
