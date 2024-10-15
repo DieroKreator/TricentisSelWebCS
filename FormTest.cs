@@ -4,7 +4,7 @@ using System.Reflection;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.DevTools.V126.Page;
-
+using OpenQA.Selenium.Support.UI;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
@@ -68,17 +68,40 @@ internal class MotorcycleInsurancePage
             // Assert.That(bool.Parse(driver.Title), "Enter Vehicle Data");
             return Driver.Title.Contains("Enter Vehicle Data");
 
-        } internal set{}
+        }
+        internal set { }
     }
 
-    internal void FillOutFormAndSubmit()
+    internal void FillOutFormAndSubmit(string make)
     {
+        IWebElement makeDropdown = Driver.FindElement(By.Id("make"));
+        IWebElement modelDropdown = Driver.FindElement(By.Id("model"));
+
+        SelectElement selectElement = new SelectElement(makeDropdown);
+
+        selectElement.SelectByText("BMW");
+
+        dropdown = Driver.FindElement(By.Id("make"));
+
+        SelectElement selectElement = new SelectElement(dropdown);
+
+        selectElement.SelectByText("BMW");
         
+        SelectDropdownByValue(By.Id("make"), "BMW");
+
     }
 
     internal void GoTo()
     {
         Driver.Navigate().GoToUrl("http://sampleapp.tricentis.com/101/app.php");
+    }
+
+    // Method to select an option by value
+    public void SelectDropdownByValue(By by, string value)
+    {
+        IWebElement dropdownElement = Driver.FindElement(by);
+        SelectElement select = new SelectElement(dropdownElement);
+        select.SelectByValue(value);
     }
 
 }
