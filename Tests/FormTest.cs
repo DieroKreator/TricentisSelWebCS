@@ -126,7 +126,50 @@ internal class MotorcycleInsurancePage
 
         SelectDropdownByValue(By.Id("occupation"), "Employee");
 
-        /* Selecionar Hobbies com validação */
+        /* Selecionar Hobbies */
+        CheckMultipleCheckboxes(By.CssSelector("Speeding"), By.CssSelector("Skydiving"));
 
+        // Assertion
+        AssertMultipleCheckboxesChecked(By.CssSelector("Speeding"), By.CssSelector("Skydiving"));
+
+        // Navigate to next page of Form 'Enter Product Data'
+        Driver.FindElement(By.Id("nextenterproductdata")).Click();
+        Driver.FindElement(By.CssSelector("input[name=\"Start Date\"]")).Displayed.Equals(true);
     }
+
+    // Method to check a single checkbox by its locator
+    public void CheckCheckbox(By checkboxLocator)
+    {
+        IWebElement checkbox = Driver.FindElement(checkboxLocator);
+        if (!checkbox.Selected)  // Check if it's not already selected
+        {
+            checkbox.Click();
+        }
+    }
+
+    // Method to check multiple checkboxes by their locators
+    public void CheckMultipleCheckboxes(params By[] checkboxLocators)
+    {
+        foreach (By locator in checkboxLocators)
+        {
+            CheckCheckbox(locator);  // Call the CheckCheckbox method for each locator
+        }
+    }
+
+    // Method to assert that a checkbox is checked
+    public void AssertCheckboxChecked(By checkboxLocator)
+    {
+        IWebElement checkbox = Driver.FindElement(checkboxLocator);
+        Assert.IsTrue(checkbox.Selected, "Checkbox is not checked as expected!");
+    }
+
+    // Method to assert multiple checkboxes are checked
+    public void AssertMultipleCheckboxesChecked(params By[] checkboxLocators)
+    {
+        foreach (By locator in checkboxLocators)
+        {
+            AssertCheckboxChecked(locator);  // Call the assert method for each locator
+        }
+    }
+
 }
