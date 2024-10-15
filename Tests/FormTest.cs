@@ -1,5 +1,6 @@
 namespace FormTest;
 
+using System;
 using System.Reflection;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -19,13 +20,14 @@ public class SendEnterInsuranceDataForm
     [SetUp] // Configura um método para ser executado antes dos testes
     public void Before()
     {
+        driver.Manage().Window.Maximize();
 
     }
 
     [TearDown] // Configura um método para ser usado depois dos testes
     public void After()
     {
-
+        driver.Quit();
     }
 
     [Test] // Indica que é um método de teste
@@ -38,9 +40,12 @@ public class SendEnterInsuranceDataForm
         motorcycleInsurancePage.GoTo();
         Assert.IsTrue(motorcycleInsurancePage.IsVisible);
 
-        // Fill out the form and submit
-        motorcycleInsurancePage.FillOutFormAndSubmit();
+        // Fill out the Vehicle form and submit
+        motorcycleInsurancePage.FillVehicleFormAndSubmit();
         Assert.IsTrue(motorcycleInsurancePage.IsVisible);
+
+        // Fill out the Insurance form and submit
+        motorcycleInsurancePage.FillInsuranceFormAndSubmit();
 
     }
 
@@ -72,7 +77,7 @@ internal class MotorcycleInsurancePage
         internal set { }
     }
 
-    internal void FillOutFormAndSubmit()
+    internal void FillVehicleFormAndSubmit()
     {
         SelectDropdownByValue(By.Id("make"), "BMW");
         SelectDropdownByValue(By.Id("model"), "Motorcycle");
@@ -109,4 +114,19 @@ internal class MotorcycleInsurancePage
         select.SelectByValue(value);
     }
 
+    internal void FillInsuranceFormAndSubmit()
+    {
+        Driver.FindElement(By.Id("firstname")).SendKeys("Charlie");
+        Driver.FindElement(By.Id("lastname")).SendKeys("Kamp");
+        Driver.FindElement(By.Id("birthdate")).SendKeys("10/01/2000");
+
+        SelectDropdownByValue(By.Id("country"), "Angola");
+
+        Driver.FindElement(By.Id("zipcode")).SendKeys("1252014");
+
+        SelectDropdownByValue(By.Id("occupation"), "Employee");
+
+        /* Selecionar Hobbies com validação */
+
+    }
 }
