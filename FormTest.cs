@@ -53,24 +53,32 @@ public class SendEnterInsuranceDataForm
 
 internal class MotorcycleInsurancePage
 {
-    private IWebDriver driver;
+    // Better make it property to know where is this used
+    private IWebDriver Driver { get; set; }
 
     public MotorcycleInsurancePage(IWebDriver driver)
     {
-        this.driver = driver;
+        Driver = driver;
     }
 
-    public bool? IsVisible { get; internal set; }
+    public bool? IsVisible
+    {
+        get
+        {
+            // Assert.That(bool.Parse(driver.Title), "Enter Vehicle Data");
+            return Driver.Title.Contains("Enter Vehicle Data");
+
+        } internal set{}
+    }
 
     internal void FillOutFormAndSubmit()
     {
-        throw new NotImplementedException();
+        
     }
 
     internal void GoTo()
     {
-        driver.Navigate().GoToUrl("http://sampleapp.tricentis.com/101/app.php");
-        // Assert.That(bool.Parse(driver.Title), "Enter Vehicle Data");
+        Driver.Navigate().GoToUrl("http://sampleapp.tricentis.com/101/app.php");
     }
 
 }
