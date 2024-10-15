@@ -74,20 +74,25 @@ internal class MotorcycleInsurancePage
 
     internal void FillOutFormAndSubmit(string make)
     {
-        IWebElement makeDropdown = Driver.FindElement(By.Id("make"));
-        IWebElement modelDropdown = Driver.FindElement(By.Id("model"));
-
-        SelectElement selectElement = new SelectElement(makeDropdown);
-
-        selectElement.SelectByText("BMW");
-
-        dropdown = Driver.FindElement(By.Id("make"));
-
-        SelectElement selectElement = new SelectElement(dropdown);
-
-        selectElement.SelectByText("BMW");
-        
         SelectDropdownByValue(By.Id("make"), "BMW");
+        SelectDropdownByValue(By.Id("model"), "Motorcycle");
+
+        Driver.FindElement(By.Id("cylindercapacity")).SendKeys("1000");
+        Driver.FindElement(By.Id("engineperformance")).SendKeys("200");
+        Driver.FindElement(By.Id("dateofmanufacture")).SendKeys("10/03/2024");
+
+        SelectDropdownByValue(By.Id("numberofseats"), "3");
+        SelectDropdownByValue(By.Id("numberofseatsmotorcycle"), "3");
+        SelectDropdownByValue(By.Id("fuel"), "Diesel");
+
+        Driver.FindElement(By.Id("payload")).SendKeys("197");
+        Driver.FindElement(By.Id("totalweight")).SendKeys("197");
+        Driver.FindElement(By.Id("listprice")).SendKeys("80000");
+        Driver.FindElement(By.Id("annualmileage")).SendKeys("20000");
+
+        // Navigate to next page of Form 'Enter Insurance Data'
+        Driver.FindElement(By.Id("nextenterinsurantdata")).Click();
+        Driver.FindElement(By.CssSelector("label.main")).Displayed.Equals(true);
 
     }
 
