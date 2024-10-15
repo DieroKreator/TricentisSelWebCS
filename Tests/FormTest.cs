@@ -72,7 +72,7 @@ internal class MotorcycleInsurancePage
         internal set { }
     }
 
-    internal void FillOutFormAndSubmit(string make)
+    internal void FillOutFormAndSubmit()
     {
         SelectDropdownByValue(By.Id("make"), "BMW");
         SelectDropdownByValue(By.Id("model"), "Motorcycle");
