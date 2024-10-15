@@ -1,7 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-public class MotorcycleInsurancePage
+public class MotorcycleInsurancePage : TestBase
 {
     
     // Better make it property to know where is this used

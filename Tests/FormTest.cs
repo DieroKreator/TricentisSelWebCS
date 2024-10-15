@@ -11,21 +11,6 @@ public class SendEnterInsuranceDataForm
     private IWebDriver driver;
 #pragma warning restore NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
 
-    [SetUp] // Configura um método para ser executado antes dos testes
-    public void Before()
-    {
-        driver = new ChromeDriver();
-
-        driver.Manage().Window.Maximize();
-
-    }
-
-    [TearDown] // Configura um método para ser usado depois dos testes
-    public void After()
-    {
-        driver.Quit();
-    }
-
     [Test] // Indica que é um método de teste
     public void SendForm()
     {
