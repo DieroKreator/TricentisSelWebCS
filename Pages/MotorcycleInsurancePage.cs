@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.UI;
 
 public class MotorcycleInsurancePage : TestBase
 {
-    
+
     // Better make it property to know where is this used
     private IWebDriver Driver { get; set; }
 
@@ -23,26 +23,35 @@ public class MotorcycleInsurancePage : TestBase
         internal set { }
     }
 
+    public IWebElement CilinderCapacityField => Driver.FindElement(By.Id("cylindercapacity"));
+    public IWebElement EnginePerformanceField => Driver.FindElement(By.Id("engineperformance"));
+    public IWebElement DateOfManufactureField => Driver.FindElement(By.Id("dateofmanufacture"));
+    public IWebElement PayloadField => Driver.FindElement(By.Id("payload"));
+    public IWebElement TotalWeightField => Driver.FindElement(By.Id("totalweight"));
+    public IWebElement ListPriceField => Driver.FindElement(By.Id("listprice"));
+    public IWebElement AnnualMileageField => Driver.FindElement(By.Id("annualmileage"));
+    public IWebElement NextEnterInsurantDataButton => Driver.FindElement(By.Id("nextenterinsurantdata"));
+
     internal void FillVehicleFormAndSubmit()
     {
         SelectDropdownByValue(By.Id("make"), "BMW");
         SelectDropdownByValue(By.Id("model"), "Motorcycle");
 
-        Driver.FindElement(By.Id("cylindercapacity")).SendKeys("1000");
-        Driver.FindElement(By.Id("engineperformance")).SendKeys("200");
-        Driver.FindElement(By.Id("dateofmanufacture")).SendKeys("10/03/2024");
+        CilinderCapacityField.SendKeys("1000");
+        EnginePerformanceField.SendKeys("200");
+        DateOfManufactureField.SendKeys("10/03/2024");
 
         SelectDropdownByValue(By.Id("numberofseats"), "3");
         SelectDropdownByValue(By.Id("numberofseatsmotorcycle"), "3");
         SelectDropdownByValue(By.Id("fuel"), "Diesel");
 
-        Driver.FindElement(By.Id("payload")).SendKeys("197");
-        Driver.FindElement(By.Id("totalweight")).SendKeys("197");
-        Driver.FindElement(By.Id("listprice")).SendKeys("80000");
-        Driver.FindElement(By.Id("annualmileage")).SendKeys("20000");
+        PayloadField.SendKeys("197");
+        TotalWeightField.SendKeys("197");
+        ListPriceField.SendKeys("80000");
+        AnnualMileageField.SendKeys("20000");
 
         // Navigate to next page of Form 'Enter Insurance Data'
-        Driver.FindElement(By.Id("nextenterinsurantdata")).Click();
+        NextEnterInsurantDataButton.Click();
         Driver.FindElement(By.CssSelector("label.main")).Displayed.Equals(true);
 
     }
@@ -60,15 +69,25 @@ public class MotorcycleInsurancePage : TestBase
         select.SelectByValue(value);
     }
 
+    public IWebElement FirstNameField => Driver.FindElement(By.Id("firstname"));
+    public IWebElement LastNameField => Driver.FindElement(By.Id("lastname"));
+        public IWebElement BirthDateField => Driver.FindElement(By.Id("birthdate"));
+
+        public IWebElement ZipCodeField => Driver.FindElement(By.Id("zipcode"));
+                public IWebElement NextEnterProductDataButton => Driver.FindElement(By.Id("nextenterproductdata"));
+
+
+
+
     internal void FillInsuranceFormAndSubmit()
     {
-        Driver.FindElement(By.Id("firstname")).SendKeys("Charlie");
-        Driver.FindElement(By.Id("lastname")).SendKeys("Kamp");
-        Driver.FindElement(By.Id("birthdate")).SendKeys("10/01/2000");
+        FirstNameField.SendKeys("Charlie");
+        LastNameField.SendKeys("Kamp");
+        BirthDateField.SendKeys("10/01/2000");
 
         SelectDropdownByValue(By.Id("country"), "Angola");
 
-        Driver.FindElement(By.Id("zipcode")).SendKeys("1252014");
+        ZipCodeField.SendKeys("1252014");
 
         SelectDropdownByValue(By.Id("occupation"), "Employee");
 
@@ -81,7 +100,7 @@ public class MotorcycleInsurancePage : TestBase
         AssertMultipleCheckboxesChecked(By.XPath("//label[contains(., \"Speeding\")]/input"), By.XPath("//label[contains(., \"Skydiving\")]/input"));
 
         // Navigate to next page of Form 'Enter Product Data'
-        Driver.FindElement(By.Id("nextenterproductdata")).Click();
+        NextEnterProductDataButton.Click();
         Driver.FindElement(By.CssSelector("input[name=\"Start Date\"]")).Displayed.Equals(true);
     }
 
