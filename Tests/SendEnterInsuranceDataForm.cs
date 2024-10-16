@@ -1,4 +1,4 @@
-namespace FormTest;
+namespace TricentisSelWebCS.Tests;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
