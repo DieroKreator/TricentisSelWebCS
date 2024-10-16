@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 [TestFixture]
-public class SendEnterInsuranceDataForm
+public class SendEnterInsuranceDataForm : TestBase 
 {
     private IWebDriver driver;
 
