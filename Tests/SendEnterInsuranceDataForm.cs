@@ -1,18 +1,17 @@
 namespace TricentisSelWebCS.Tests;
 
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 [TestFixture]
 public class SendEnterInsuranceDataForm : TestBase 
 {
-    private IWebDriver driver;
+    private IWebDriver Driver { get; set; }
 
     [Test] // Indica que é um método de teste
     public void SendForm()
     {
         // Navigate to url and assert
-        var motorcycleInsurancePage = new MotorcycleInsurancePage(driver);
+        var motorcycleInsurancePage = new MotorcycleInsurancePage(Driver);
         motorcycleInsurancePage.GoTo();
         Assert.IsTrue(motorcycleInsurancePage.IsVisible);
 
