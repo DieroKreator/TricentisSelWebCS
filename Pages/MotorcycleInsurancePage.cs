@@ -6,6 +6,14 @@ public class MotorcycleInsurancePage : TestBase
 
     // Better make it property to know where is this used
     private IWebDriver Driver { get; set; }
+    public IWebElement CilinderCapacityField => Driver.FindElement(By.Id("cylindercapacity"));
+    public IWebElement EnginePerformanceField => Driver.FindElement(By.Id("engineperformance"));
+    public IWebElement DateOfManufactureField => Driver.FindElement(By.Id("dateofmanufacture"));
+    public IWebElement PayloadField => Driver.FindElement(By.Id("payload"));
+    public IWebElement TotalWeightField => Driver.FindElement(By.Id("totalweight"));
+    public IWebElement ListPriceField => Driver.FindElement(By.Id("listprice"));
+    public IWebElement AnnualMileageField => Driver.FindElement(By.Id("annualmileage"));
+    public IWebElement NextEnterInsurantDataButton => Driver.FindElement(By.Id("nextenterinsurantdata"));
 
     public MotorcycleInsurancePage(IWebDriver driver)
     {
@@ -16,21 +24,21 @@ public class MotorcycleInsurancePage : TestBase
     {
         get
         {
-            // Assert.That(bool.Parse(driver.Title), "Enter Vehicle Data");
-            return Driver.Title.Contains("Enter Vehicle Data");
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+                IWebElement NextEnterInsurantDataButton = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("nextenterinsurantdata")));
+                return NextEnterInsurantDataButton.Displayed;
+            }
+            catch (NoSuchElementException)
+            {
+                // return Driver.Title.Contains("Enter Vehicle Data");
+                return false;
+            }            
 
         }
         internal set { }
     }
-
-    public IWebElement CilinderCapacityField => Driver.FindElement(By.Id("cylindercapacity"));
-    public IWebElement EnginePerformanceField => Driver.FindElement(By.Id("engineperformance"));
-    public IWebElement DateOfManufactureField => Driver.FindElement(By.Id("dateofmanufacture"));
-    public IWebElement PayloadField => Driver.FindElement(By.Id("payload"));
-    public IWebElement TotalWeightField => Driver.FindElement(By.Id("totalweight"));
-    public IWebElement ListPriceField => Driver.FindElement(By.Id("listprice"));
-    public IWebElement AnnualMileageField => Driver.FindElement(By.Id("annualmileage"));
-    public IWebElement NextEnterInsurantDataButton => Driver.FindElement(By.Id("nextenterinsurantdata"));
 
     internal void FillVehicleFormAndSubmit()
     {
@@ -59,6 +67,7 @@ public class MotorcycleInsurancePage : TestBase
     internal void GoTo()
     {
         Driver.Navigate().GoToUrl("http://sampleapp.tricentis.com/101/app.php");
+        Assert.That(bool.Parse(driver.Title), "Enter Vehicle Data");
     }
 
     // Method to select an option by value
