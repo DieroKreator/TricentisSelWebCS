@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 [TestFixture]
 public class SendEnterInsuranceDataForm : TestBase 
 {
-    private IWebDriver Driver { get; set; }
+    private IWebDriver? Driver { get; set; }
 
     [Test] // Indica que é um método de teste
     public void SendForm()
