@@ -13,7 +13,7 @@ public class SendEnterInsuranceDataForm : TestBase
         // Navigate to url and assert
         var motorcycleInsurancePage = new MotorcycleInsurancePage(Driver);
         motorcycleInsurancePage.GoTo();
-        Assert.IsTrue(motorcycleInsurancePage.IsVisible);
+        Assert.IsTrue(motorcycleInsurancePage.IsVisible, "Motorcycle Insurance Page was not visible.");
 
         // Fill out the Vehicle form and submit
         motorcycleInsurancePage.FillVehicleFormAndSubmit();
